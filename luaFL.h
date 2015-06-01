@@ -4,6 +4,7 @@
 #include "lua/lua.hpp"
 #include <list>
 #include <unordered_map>
+#include <iostream>
 #include <sstream>
 
 template<typename T> class LuaWarp {
@@ -32,14 +33,14 @@ public:
 		lua_pushcfunction(L, value);
 	}
 
-	template<typename KT, typename VT>static void addMember(lua_State *L, KT name, VT value) {
-		add(L, name);
+	template<typename KT, typename VT>static void addMember(lua_State *L, KT key, VT value) {
+		add(L, key);
 		add(L, value);
         lua_rawset(L, -3);
     }
     
 	template<typename LT> static void addMember(lua_State *L, const char* name, const std::list<LT> values) {
-		lua_pushstring(L, name);
+		add(L, name);
 		lua_newtable(L);
 		int index = 1;
 		for(auto v : values) addMember(L, index++, v);
@@ -76,7 +77,6 @@ public:
     }
 };
 
-#include <iostream>
 class LuaEnv {
 	lua_State* _L;
 public:
