@@ -25,10 +25,7 @@ int main(int argc, char** argv) {
 		http.bind(l);
 		http.addMember(l, "params", std::list<int>{10, 20, 40, 80});
 		http.addMember(l, "query", query);
-		//		addMember(l, "query", values);
-		//addMember(l, "query", parser.Params.c_str(query, 256));
 		lua_pcall(l, 1, 0, 0);
 	}
-
 	return 0;
 }
