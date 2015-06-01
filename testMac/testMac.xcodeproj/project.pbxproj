@@ -92,6 +92,7 @@
 		A7604BFC1B1C684F000B9FB0 /* lutf8lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lutf8lib.c; path = ../../lua/lutf8lib.c; sourceTree = "<group>"; };
 		A7604BFD1B1C684F000B9FB0 /* lvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lvm.c; path = ../../lua/lvm.c; sourceTree = "<group>"; };
 		A7604BFE1B1C684F000B9FB0 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lzio.c; path = ../../lua/lzio.c; sourceTree = "<group>"; };
+		A7604C201B1C6CE7000B9FB0 /* luaFL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luaFL.h; path = ../../luaFL.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +125,7 @@
 		A7604BD21B1C67DF000B9FB0 /* testMac */ = {
 			isa = PBXGroup;
 			children = (
+				A7604C201B1C6CE7000B9FB0 /* luaFL.h */,
 				A7604BDC1B1C6818000B9FB0 /* lua */,
 				A7604BDA1B1C6803000B9FB0 /* main.cpp */,
 			);

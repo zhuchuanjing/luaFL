@@ -95,7 +95,11 @@ public:
 			lua_setglobal(_L, "Print");
 		}
 	}
-
+    
+    ~LuaEnv() {
+        if(_L != nullptr) lua_close(_L);
+    }
+    
 	lua_State* get() {
 		return _L;
 	}
@@ -106,7 +110,7 @@ public:
 
 	void load(const char* name) {
 		if(_L != nullptr) {
-			lua_getglobal(_L, "__G__TRACKBACK__");
+			lua_getglobal(_L, "Print");
 			int errfunc = lua_gettop(_L);
 			luaL_loadfile(_L, name);
 			lua_pcall(_L, 0, 0, errfunc);
