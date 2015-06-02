@@ -125,5 +125,14 @@
     <ClInclude Include="..\luaFL.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\uvpeer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\redis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
