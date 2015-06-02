@@ -30,7 +30,7 @@ public:
 
 	void onRead() {
 		HttpParser parser(data, data_size);
-		keepAlive = false;
+		keepAlive = true;
 		for(auto h : parser.Heads) {
 			if(h.first.equal("Connection")) {
 				if(h.second.equal("close")) keepAlive = false;
@@ -105,9 +105,7 @@ public:
 					command.second += ret.second;
 				}
 			}
-			std::stringstream ss;
-			ss << '*' << command.first << "\r\n" << command.second;
-			if(r->call(ss.str())) {
+			if(r->call(command)) {
 				if(r->result.size() == 1) r->add(L, r->result.front());
 				else if(r->result.size() > 1) {
 					lua_newtable(L);
@@ -119,8 +117,7 @@ public:
 			return 1;
 		});
 		addMember(L, "Delete", [](lua_State* L) {
-			Redis* r = getObj(L, 1);
-			delete r;
+			delete getObj(L, 1);
 			return 0;
 		});
 	}

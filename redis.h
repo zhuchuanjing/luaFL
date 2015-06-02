@@ -65,8 +65,10 @@ class RedisClient : public UVClient {
             return std::pair<int, std::string>{first.first + second.first, first.second + second.second};
         }
 
-		bool call(std::string command) {
-			UVClient::write(command.c_str(), (int)command.length());
+		bool call(const std::pair<int, std::string> command) {
+			std::stringstream ss;
+			ss << '*' << command.first << "\r\n" << command.second;
+			UVClient::write(ss.str().c_str(), (int)ss.str().length());
 			bool completed = false;
 			clear();
 			while(!completed && connected) {
@@ -92,9 +94,7 @@ class RedisClient : public UVClient {
 								}
 							}
 						} else if(!bulk.str.empty()) result.push_back(bulk.str);
-					} else {
-						completed = false;
-					}
+					} else completed = false;
 				}
 			}
 			return connected && status != '-';
@@ -102,9 +102,7 @@ class RedisClient : public UVClient {
 
         template<typename... Args> bool call(Args... args) {
             auto request = assemble(args...);
-            std::stringstream ss;
-            ss << '*' << request.first << "\r\n" << request.second;
-			return call(ss.str());
+			return call(request);
         }
 };
 
