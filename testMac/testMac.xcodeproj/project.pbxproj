@@ -59,7 +59,7 @@
 		A7604BD01B1C67DF000B9FB0 /* testMac */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testMac; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D98D441B1D1AEE00988E46 /* luaFL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luaFL.h; path = ../luaFL.h; sourceTree = "<group>"; };
 		A7D98D451B1D1BD500988E46 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../test/main.cpp; sourceTree = SOURCE_ROOT; };
-		A7D98D471B1D1CB100988E46 /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../lua/lapi.c; sourceTree = "<group>"; };
+		A7D98D471B1D1CB100988E46 /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../lua/lapi.c; sourceTree = SOURCE_ROOT; };
 		A7D98D481B1D1CB100988E46 /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = ../../lua/lauxlib.c; sourceTree = "<group>"; };
 		A7D98D491B1D1CB100988E46 /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = ../../lua/lbaselib.c; sourceTree = "<group>"; };
 		A7D98D4A1B1D1CB100988E46 /* lbitlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbitlib.c; path = ../../lua/lbitlib.c; sourceTree = "<group>"; };
