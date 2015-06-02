@@ -30,7 +30,7 @@ public:
 
 	void onRead() {
 		HttpParser parser(data, data_size);
-		keepAlive = false;
+		keepAlive = true;
 		for(auto h : parser.Heads) {
 			if(h.first.equal("Connection")) {
 				if(h.second.equal("close")) keepAlive = false;
@@ -39,19 +39,20 @@ public:
 		}
 		char uri[256];
 		char query_buf[1024];
-		auto l = gLua.create();
-		if(HttpPeer::getClassMember(l, "get") != LUA_TNIL) {
+		//auto l = gLua.create();
+		if(HttpPeer::getClassMember(gLua.get(), "get") != LUA_TNIL) {
 			std::unordered_map<const char*, const char*> query;
 			Parser query_parser(QueryKeys);
 			query_parser.process(parser.Params.c_str(query_buf, 1024));
 			for(size_t index = 0; index < query_parser.Keys.size(); index++) {
 				if(!query_parser.Values[index].empty()) query[query_parser.Keys[index].c_str()] = query_parser.Values[index].c_str();
 			}
-			bind(l);
-			addMember(l, "url", parser.Url.c_str(uri, 256));
-			addMember(l, "query", query);
-			lua_pcall(l, 1, 0, 0);
+			bind(gLua.get());
+			addMember(gLua.get(), "url", parser.Url.c_str(uri, 256));
+			addMember(gLua.get(), "query", query);
+			lua_pcall(gLua.get(), 1, 0, 0);
 		}
+        writeHttp("Hello World");
 	}
 
 	virtual void onClose() {
@@ -129,8 +130,8 @@ public:
 int main(int argc, char** argv) {
 	HttpPeer::registerClass(gLua.get());
 	Redis::registerClass(gLua.get());
-	//lua.load("/Users/zhuchuanjing/Desktop/future/luaFL/test/test.lua");
-	gLua.load("test.lua");
+	gLua.load("/Users/zhuchuanjing/Desktop/future/luaFL/test/test.lua");
+	//gLua.load("test.lua");
 	RedisClient r;
 	if(r.connect("127.0.0.1", 6379) && r.call("get", "aaa")) {
 		for(auto item : r.result) {

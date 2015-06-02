@@ -1,5 +1,5 @@
 --Print(10)
-r = Redis.New("127.0.0.1", 6379)
+r = Redis.New()
 r:Call("set", "god", "zhuchuanjing")
 Print(r:Call("get", "aaa"))
 Print(r:Call("get", "god"))
