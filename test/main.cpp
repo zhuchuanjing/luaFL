@@ -39,7 +39,6 @@ public:
 		}
 		char uri[256];
 		char query_buf[1024];
-		//auto l = gLua.create();
 		if(HttpPeer::getClassMember(gLua.get(), "get") != LUA_TNIL) {
 			std::unordered_map<const char*, const char*> query;
 			Parser query_parser(QueryKeys);
@@ -52,7 +51,6 @@ public:
 			addMember(gLua.get(), "query", query);
 			lua_pcall(gLua.get(), 1, 0, 0);
 		}
-        writeHttp("Hello World");
 	}
 
 	virtual void onClose() {
@@ -108,12 +106,8 @@ public:
 			}
 			if(r->call(command)) {
 				if(r->result.size() == 1) r->add(L, r->result.front());
-				else if(r->result.size() > 1) {
-					lua_newtable(L);
-					for(auto item : r->result) {
-						r->add(L, item);
-					}
-				} else lua_pushnil(L);
+				else if(r->result.size() > 1) r->add(L, r->result);
+				else lua_pushnil(L);
 			} else lua_pushnil(L);
 			return 1;
 		});
@@ -127,8 +121,8 @@ public:
 int main(int argc, char** argv) {
 	HttpPeer::registerClass(gLua.get());
 	Redis::registerClass(gLua.get());
-	gLua.load("/Users/zhuchuanjing/Desktop/future/luaFL/test/test.lua");
-	//gLua.load("test.lua");
+	//gLua.load("/Users/zhuchuanjing/Desktop/future/luaFL/test/test.lua");
+	gLua.load("test.lua");
 	RedisClient r;
 	if(r.connect("127.0.0.1", 6379) && r.call("get", "aaa")) {
 		for(auto item : r.result) {
