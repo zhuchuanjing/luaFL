@@ -33,6 +33,13 @@ public:
 		lua_pushcfunction(L, value);
 	}
 
+	template<typename LT> static void add(lua_State *L, const std::list<LT> values) {
+		lua_newtable(L);
+		int index = 1;
+		for(auto v : values) addMember(L, index++, v);
+		lua_rawset(L, -3);
+	}
+
 	template<typename KT, typename VT>static void addMember(lua_State *L, KT key, VT value) {
 		add(L, key);
 		add(L, value);
@@ -41,10 +48,7 @@ public:
     
 	template<typename LT> static void addMember(lua_State *L, const char* name, const std::list<LT> values) {
 		add(L, name);
-		lua_newtable(L);
-		int index = 1;
-		for(auto v : values) addMember(L, index++, v);
-		lua_rawset(L, -3);
+		add(L, values);
 	}
 	
 	template<typename KT, typename VT> static void addMember(lua_State *L, const char* name, const std::unordered_map<KT, VT> values) {
